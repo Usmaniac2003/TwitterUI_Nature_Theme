@@ -7,7 +7,7 @@ function App() {
   let IsMobile = useMediaQuery("(min-width:805px)")
   let { Background } = MyStates();
   return (
-    <div style={{ background: `${Background}` }}>
+    <div style={{ background: `${Background}`, minHeight: "100vh" }}>
       {
         IsMobile ? <HomePage /> : <MobilePage />
       }

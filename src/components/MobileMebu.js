@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import HomeIcon from '@mui/icons-material/Home';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ExploreIcon from '@mui/icons-material/Explore';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 import SpaIcon from '@mui/icons-material/Spa';
 import { Typography, Switch } from '@mui/material';
 import { MyStates } from '../StateManage';
@@ -56,18 +58,21 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 function MobileMenu() {
     let { Color, setColor, setBackground, Border, setBorder, Home, setHome, Explore, setExplore, Notification, setNotification, Messages, setMessages, setpostBg, BaseColor } = MyStates();
-    const SwitchEvent = (e) => {
-        if (e.target.checked === true) {
+    const [IsDarkMode, SetIsDarkMode] = useState(false);
+    const SwitchEvent = () => {
+        if (!IsDarkMode) {
             setBackground("#121212");
             setpostBg("#121212");
             setColor("white");
             setBorder("2px solid rgb(255,255,255,0.1)")
+            SetIsDarkMode(true);
         }
-        else if (e.target.checked === false) {
+        else if (IsDarkMode) {
             setBackground("#f0fff0");
             setpostBg("#FAF9F6");
             setColor("black");
             setBorder("2px solid rgb(0,0,0,0.1)");
+            SetIsDarkMode(false)
         }
 
     }
@@ -98,27 +103,28 @@ function MobileMenu() {
 
     return (
         <>
-
-            <div className="menu-container" style={{ borderRight: `${Border}`, position: "sticky", top: "1px", display: "flex", flexDirection: "column" }}>
+            <div className="mobilemenu-container" style={{ borderBottom: `${Border}`, background: `#90EE90`, display: "flex", flexDirection: "row", height: "10vh", justifyContent: "space-between", alignItems: "center", padding: "1vw", position: "sticky", top: ".1px", zIndex: "100" }}>
                 <div className="logo">
                     <SpaIcon style={{ fontSize: "clamp(30px,4vw,60px)", color: `${BaseColor}` }} />
                 </div>
-                <div className="menu">
-                    <div className="menu-item" onClick={setHomeTrue} style={{ color: `${Home ? `${BaseColor}` : Color}` }}>
+
+                <div className="menu" style={{ display: "flex", flexDirection: "row", background: `#90EE90` }}>
+                    <div className="menu-item" onClick={setHomeTrue} style={{ color: `${Home ? "green" : "black"}` }}>
                         <HomeIcon /><Typography variant='p' fontWeight={600} ></Typography>
                     </div>
-                    <div className="menu-item" onClick={setExploreTrue} style={{ color: `${Explore ? `${BaseColor}` : Color}` }}>
+                    <div className="menu-item" onClick={setExploreTrue} style={{ color: `${Explore ? "green" : "black"}` }}>
                         <ExploreIcon /><Typography variant='p' fontWeight={600}></Typography>
                     </div>
-                    <div className="menu-item" onClick={setNotificationTrue} style={{ color: `${Notification ? `${BaseColor}` : Color}` }}>
+                    <div className="menu-item" onClick={setNotificationTrue} style={{ color: `${Notification ? "green" : "black"}` }}>
                         <NotificationsIcon /><Typography variant='p' fontWeight={600}></Typography>
                     </div>
-                    <div className="menu-item" onClick={setMessagesTrue} style={{ color: `${Messages ? `${BaseColor}` : Color}` }}>
+                    <div className="menu-item" onClick={setMessagesTrue} style={{ color: `${Messages ? "green" : "black"}` }}>
                         <MailOutlineIcon /><Typography variant='p' fontWeight={600}></Typography>
                     </div>
-                </div>
-                <div className="Darkmode">
-                    <MaterialUISwitch onChange={SwitchEvent} sx={{ ".MuiButtonGroup-root": { color: "black" } }} />
+
+                    {
+                        IsDarkMode ? <DarkModeIcon onClick={SwitchEvent} /> : <LightModeIcon onClick={SwitchEvent} />
+                    }
                 </div>
 
             </div>

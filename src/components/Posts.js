@@ -8,7 +8,7 @@ import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import SwapCallsOutlinedIcon from '@mui/icons-material/SwapCallsOutlined';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MyStates } from '../StateManage';
 import ME from "../images/ME.jpeg";
 import Sunset from "../images/sunset2.jpg";
@@ -45,17 +45,18 @@ function Posts() {
         }
     };
     const HandleCreatePost = () => {
-        if (selectedImage && postText !== "") {
-            const NewPost = { Image: selectedImage, Description: postText };
-            SetNumberOfPosts([...NumberOfPosts, NewPost]);
-            setPostText("");
-            setSelectedImage(null);
-            setPostText("");
+        if (postText === "" && selectedImage === null) {
+            alert("Please Insert Something to Post");
+            return;
         }
-        else {
-            alert("Please Check your Inputs Again")
-        }
+        const NewPost = { Image: selectedImage, Description: postText };
+        SetNumberOfPosts([...NumberOfPosts, NewPost]);
+        setPostText("");
+        setSelectedImage(null);
+        setPostText("");
+
     };
+
     return (
         <div className="post" style={{ borderRight: `${Border}` }}>
             <div className="Home" style={{ borderBottom: `${Border}`, color: `${Color}` }}>
@@ -153,7 +154,9 @@ function Posts() {
                                         </div>
                                     </div>
                                 </div>
-                                <img src={Post.Image} alt="sunset" style={{ borderRadius: "10px", width: "100%", height: "60vh", objectFit: "cover" }} />
+                                {
+                                    Post.Image && <img src={Post.Image} alt="sunset" style={{ borderRadius: "10px", width: "100%", height: "60vh", objectFit: "cover" }} />
+                                }
                                 <div className="btn-grp" style={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
                                     <ChatOutlinedIcon sx={{
                                         color: `${Color}`,

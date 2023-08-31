@@ -33,7 +33,7 @@ function MobilePage() {
         }
     }
     return (
-        <div className="homepage" style={{ display: "flex" }}>
+        <div className="homepage" style={{ display: "flex", flexDirection: "column" }}>
 
             <MobileMenu />
             <div>
