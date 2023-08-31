@@ -1,15 +1,17 @@
 import React from 'react';
-import axios from "axios";
-import { Button, Typography } from '@mui/material';
 import { MyStates } from './StateManage';
-import { Route, Routes, NavLink } from 'react-router-dom';
-
+import HomePage from './pages/HomePage';
+import MobilePage from './pages/MobilePage';
+import { useMediaQuery } from '@mui/material';
 function App() {
-  let { state } = MyStates();
+  let IsMobile = useMediaQuery("(min-width:805px)")
+  let { Background } = MyStates();
   return (
-    <>
-      <Typography className='mt-5'>Hello World {state}</Typography>
-    </>
+    <div style={{ background: `${Background}` }}>
+      {
+        IsMobile ? <HomePage /> : <MobilePage />
+      }
+    </div>
   )
 }
 

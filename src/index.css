@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,4 +6,37 @@
   margin: 0;
   padding: 0;
   text-decoration: none;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-container {
+  display: flex;
+  height: 100vh;
+  width: 20vw;
+  flex-direction: column;
+  gap: 10vh;
+  padding: 3vw;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 5vh;
+}
+
+.menu-item {
+  display: flex;
+  gap: 1vw;
+  align-items: center;
+  cursor: pointer;
+}
+
+.Home {
+  display: flex;
+  justify-content: space-between;
+  padding: 2vw;
 }/*# sourceMappingURL=index.css.map */
